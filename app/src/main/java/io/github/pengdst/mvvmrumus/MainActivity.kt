@@ -56,11 +56,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun subscribeViewModel() {
         viewModel.observeLuasPersegiPanjang().observe(this) { luas ->
-            tvHasilLuas.text = luas.toString()
+            tvHasilLuas.text = "Hasil Luas: $luas"
         }
 
         viewModel.observeKelilingPersegiPanjang().observe(this) { keliling ->
-            tvHasilKeliling.text = keliling.toString()
+            tvHasilKeliling.text = "Hasil Keliling: $keliling"
         }
     }
 
