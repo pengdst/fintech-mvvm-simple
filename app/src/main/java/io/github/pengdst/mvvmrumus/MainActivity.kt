@@ -21,16 +21,12 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var edtLebar: EditText
     private lateinit var edtPanjang: EditText
-    private lateinit var edtTinggi: EditText
-    private lateinit var edtAlas: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        edtAlas = binding.edtAlas
-        edtTinggi = binding.edtTinggi
         edtPanjang = binding.edtPanjang
         edtLebar = binding.edtLebar
 
@@ -42,15 +38,29 @@ class MainActivity : AppCompatActivity() {
 
         initViewModel()
         subscribeViewModel()
+
+        btnHitungLuas.setOnClickListener {
+            val panjang = edtPanjang.text.toString().trim().toDouble()
+            val lebar = edtLebar.text.toString().trim().toDouble()
+
+            viewModel.hitungLuasPersegiPanjang(panjang, lebar)
+        }
+
+        btnHitungKeliling.setOnClickListener {
+            val panjang = edtPanjang.text.toString().trim().toDouble()
+            val lebar = edtLebar.text.toString().trim().toDouble()
+
+            viewModel.hitungKelilingPersegiPanjang(panjang, lebar)
+        }
     }
 
     private fun subscribeViewModel() {
         viewModel.observeLuasPersegiPanjang().observe(this) { luas ->
-
+            tvHasilLuas.text = luas.toString()
         }
 
         viewModel.observeKelilingPersegiPanjang().observe(this) { keliling ->
-
+            tvHasilKeliling.text = keliling.toString()
         }
     }
 
