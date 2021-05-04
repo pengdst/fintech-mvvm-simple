@@ -6,13 +6,20 @@ import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
 
-    private val luasPersegiPanjang = MutableLiveData<Float>()
+    private val luasPersegiPanjang = MutableLiveData<Double>()
+    private val kelilingPersegiPanjang = MutableLiveData<Double>()
 
-    fun hitungPersegiPanjang(panjang: Float, lebar: Float){
+    fun hitungLuasPersegiPanjang(panjang: Double, lebar: Double){
         val luas = panjang * lebar
 
         luasPersegiPanjang.postValue(luas)
     }
 
-    fun observeLuasPersegiPanjang(): LiveData<Float> = luasPersegiPanjang
+    fun hitungKelilingPersegiPanjang(panjang: Double, lebar: Double) {
+        val hasil = 2 * (panjang * lebar)
+        kelilingPersegiPanjang.postValue(hasil)
+    }
+
+    fun observeLuasPersegiPanjang(): LiveData<Double> = luasPersegiPanjang
+    fun observeKelilingPersegiPanjang(): LiveData<Double> = kelilingPersegiPanjang
 }
