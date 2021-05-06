@@ -13,42 +13,24 @@ class MainActivity : AppCompatActivity() {
     private lateinit var viewModel: MainViewModel
     private lateinit var binding: ActivityMainBinding
 
-    private lateinit var btnHitungLuas: Button
-    private lateinit var btnHitungKeliling: Button
-
-    private lateinit var tvHasilKeliling: TextView
-    private lateinit var tvHasilLuas: TextView
-
-    private lateinit var edtLebar: EditText
-    private lateinit var edtPanjang: EditText
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        edtPanjang = binding.edtPanjang
-        edtLebar = binding.edtLebar
-
-        tvHasilLuas = binding.tvHasilLuas
-        tvHasilKeliling = binding.tvHasilKeliling
-
-        btnHitungKeliling = binding.btnHitungKeliling
-        btnHitungLuas = binding.btnHitungLuas
-
         initViewModel()
         subscribeViewModel()
 
-        btnHitungLuas.setOnClickListener {
-            val panjang = edtPanjang.text.toString().trim().toDouble()
-            val lebar = edtLebar.text.toString().trim().toDouble()
+        binding.btnHitungLuas.setOnClickListener {
+            val panjang = binding.edtPanjang.text.toString().trim().toDouble()
+            val lebar = binding.edtLebar.text.toString().trim().toDouble()
 
             viewModel.hitungLuasPersegiPanjang(panjang, lebar)
         }
 
-        btnHitungKeliling.setOnClickListener {
-            val panjang = edtPanjang.text.toString().trim().toDouble()
-            val lebar = edtLebar.text.toString().trim().toDouble()
+        binding.btnHitungKeliling.setOnClickListener {
+            val panjang = binding.edtPanjang.text.toString().trim().toDouble()
+            val lebar = binding.edtLebar.text.toString().trim().toDouble()
 
             viewModel.hitungKelilingPersegiPanjang(panjang, lebar)
         }
@@ -56,11 +38,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun subscribeViewModel() {
         viewModel.observeLuasPersegiPanjang().observe(this) { luas ->
-            tvHasilLuas.text = "Hasil Luas: $luas"
+            binding.tvHasilLuas.text = "Hasil Luas: $luas"
         }
 
         viewModel.observeKelilingPersegiPanjang().observe(this) { keliling ->
-            tvHasilKeliling.text = "Hasil Keliling: $keliling"
+            binding.tvHasilKeliling.text = "Hasil Keliling: $keliling"
         }
     }
 
